@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 
 /**
- * Created by virgi on 05.01.2017.
+ * Created by ViRGiL7 on 05.01.2017.
  * Project: Perceptron_logic
  */
 public class FirstWork {

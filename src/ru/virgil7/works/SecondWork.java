@@ -1,7 +1,7 @@
 package ru.virgil7.works;
 
 /**
- * Created by virgi on 05.01.2017.
+ * Created by ViRGiL7 on 05.01.2017.
  * Project: Perceptron_logic
  */
 public class SecondWork {

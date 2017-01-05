@@ -5,7 +5,7 @@ import ru.virgil7.functions.NeuronFunction;
 import java.util.Random;
 
 /**
- * Created by virgi on 05.01.2017.
+ * Created by ViRGiL7 on 05.01.2017.
  * Project: Perceptron_logic
  */
 public class Neuron {

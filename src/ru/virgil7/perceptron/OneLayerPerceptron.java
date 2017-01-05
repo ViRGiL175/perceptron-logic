@@ -1,9 +1,8 @@
 package ru.virgil7.perceptron;
 
-/**
- * Created by virgi on 05.01.2017.
- * Project: Perceptron_logic
- */
+import java.util.Arrays;
+
+
 public class OneLayerPerceptron {
 
     private double[] outs;
@@ -12,11 +11,15 @@ public class OneLayerPerceptron {
     public OneLayerPerceptron(Neuron[] neurons) {
         this.neurons = neurons;
         outs = new double[neurons.length];
+        System.out.println("\n" + this.getClass().getSimpleName() + ". Neurons: " + neurons.length);
     }
 
     public void learn(double[][] inputs, double[][] targets, double speed, double maxError, double maxEpoch)
             throws Exception {
-
+        System.out.println("Start learning.\n" +
+                "Speed: " + speed + "\t" +
+                "Max. error: " + maxEpoch + "\t" +
+                "Max. epoch: " + maxEpoch);
         if (targets[0].length != outs.length) {
             throw new IndexOutOfBoundsException("Targets and Neurons count mismatch!");
         }
@@ -44,6 +47,7 @@ public class OneLayerPerceptron {
             }
             epoch++;
         } while ((epoch <= maxEpoch) && (error > maxError));
+        System.out.println("Successfully learned.\nLast error: " + error + "\tLast epoch: " + epoch + "\n");
     }
 
     public double[] getResult(double[] inputs) throws Exception {
@@ -51,6 +55,8 @@ public class OneLayerPerceptron {
         for (int i = 0; i < results.length; i++) {
             results[i] = neurons[i].getResult(inputs);
         }
+        System.out.println(this.getClass().getSimpleName() + " results:\n" +
+                "Inputs:\t\t" + Arrays.toString(inputs) + "\nOutputs:\t" + Arrays.toString(results));
         return results;
     }
 }
