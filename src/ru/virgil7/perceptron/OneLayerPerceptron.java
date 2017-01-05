@@ -25,12 +25,6 @@ public class OneLayerPerceptron {
             neuron.setInputsCount(inputs[0].length);
         }
 
-        double[][] biasedInputs = new double[inputs.length][inputs[0].length + 1];
-        for (int i = 0; i < biasedInputs.length; i++) {
-            biasedInputs[i][0] = neurons[0].getBias();
-            System.arraycopy(inputs[i], 0, biasedInputs[i], 1, inputs[0].length);
-        }
-
         int epoch = 0;
         double error;
         double neuronError;

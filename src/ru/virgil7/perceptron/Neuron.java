@@ -22,6 +22,11 @@ public class Neuron {
         this.neuronFunction = neuronFunction;
     }
 
+    public Neuron(NeuronFunction neuronFunction, double bias) {
+        this.neuronFunction = neuronFunction;
+        this.bias = bias;
+    }
+
     public void setInputsCount(int inputsCount) {
         this.inputsCount = inputsCount;
         inputs = new double[this.inputsCount];

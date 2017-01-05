@@ -29,7 +29,7 @@ public class Main {
         };
 
         Neuron[] neurons = {
-                new Neuron(new ThresholdFunction()),
+                new Neuron(new ThresholdFunction(), -0.5),
         };
         OneLayerPerceptron oneLayerPerceptron = new OneLayerPerceptron(neurons);
         oneLayerPerceptron.learn(testInputs, testTargets, 0.001, 0, 1500);
