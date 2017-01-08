@@ -1,4 +1,4 @@
-package ru.virgil7.perceptron;
+package ru.virgil7.neurons;
 
 import ru.virgil7.functions.NeuronFunction;
 

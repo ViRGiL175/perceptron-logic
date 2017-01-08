@@ -1,30 +1,29 @@
-package ru.virgil7.perceptron;
+package ru.virgil7.perceptrons;
+
+import ru.virgil7.neurons.Neuron;
 
 import java.util.Arrays;
 
 
-public class OneLayerPerceptron {
+public class OneLayerPerceptron extends Perceptron {
 
-    private double[] outs;
-    private Neuron[] neurons;
-
-    public OneLayerPerceptron(Neuron[] neurons) {
-        this.neurons = neurons;
-        outs = new double[neurons.length];
-        System.out.println("\n" + this.getClass().getSimpleName() + ". Neurons: " + neurons.length);
+    public OneLayerPerceptron(Neuron[] outNeurons) {
+        super(outNeurons);
+        System.out.println("\n" + this.getClass().getSimpleName() + ". Neurons: " + outNeurons.length);
     }
 
-    public void learn(double[][] inputs, double[][] targets, double speed, double maxError, double maxEpoch)
+    public void learn(double[][] inputs, double[][] targets, double speed, double maxError, int maxEpoch)
             throws Exception {
+
         System.out.println("Start learning.\n" +
-                "Speed: " + speed + "\t" +
-                "Max. error: " + maxEpoch + "\t" +
+                "Speed: " + speed + " " +
+                "Max. error: " + maxError + " " +
                 "Max. epoch: " + maxEpoch);
         if (targets[0].length != outs.length) {
             throw new IndexOutOfBoundsException("Targets and Neurons count mismatch!");
         }
 
-        for (Neuron neuron : neurons) {
+        for (Neuron neuron : outNeurons) {
             neuron.setInputsCount(inputs[0].length);
         }
 
@@ -36,11 +35,11 @@ public class OneLayerPerceptron {
         do {
             error = 0;
             for (int k = 0; k < targetsCount; k++) {
-                for (int i = 0; i < neurons.length; i++) {
-                    neuronError = targets[k][i] - neurons[i].getResult(inputs[k]);
+                for (int i = 0; i < outNeurons.length; i++) {
+                    neuronError = targets[k][i] - outNeurons[i].getResult(inputs[k]);
                     for (int j = 0; j < inputs[k].length; j++) {
-                        double delta = speed * neuronError * inputs[k][j];
-                        neurons[i].getWeights()[j] += delta;
+                        double deltaWeight = speed * neuronError * inputs[k][j];
+                        outNeurons[i].getWeights()[j] += deltaWeight;
                     }
                     error += Math.abs(neuronError);
                 }
@@ -50,10 +49,11 @@ public class OneLayerPerceptron {
         System.out.println("Successfully learned.\nLast error: " + error + "\tLast epoch: " + epoch + "\n");
     }
 
+    @Override
     public double[] getResult(double[] inputs) throws Exception {
-        double[] results = new double[neurons.length];
+        double[] results = new double[outNeurons.length];
         for (int i = 0; i < results.length; i++) {
-            results[i] = neurons[i].getResult(inputs);
+            results[i] = outNeurons[i].getResult(inputs);
         }
         System.out.println(this.getClass().getSimpleName() + " results:\n" +
                 "Inputs:\t\t" + Arrays.toString(inputs) + "\nOutputs:\t" + Arrays.toString(results));
