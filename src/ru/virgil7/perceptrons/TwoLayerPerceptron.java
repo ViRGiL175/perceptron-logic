@@ -93,8 +93,11 @@ public class TwoLayerPerceptron extends Perceptron {
             }
             results[i] = outNeurons[i].getResult(hiddenLayerResults);
         }
-        System.out.println(this.getClass().getSimpleName() + " results:\n" +
-                "Inputs:\t\t" + Arrays.toString(inputs) + "\nOutputs:\t" + Arrays.toString(results));
         return results;
+    }
+
+    public void printResult(double[] inputs) throws Exception {
+        System.out.println(this.getClass().getSimpleName() + " results:\n" +
+                "Inputs:\t\t" + Arrays.toString(inputs) + "\nOutputs:\t" + Arrays.toString(getResult(inputs)));
     }
 }

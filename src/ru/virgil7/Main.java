@@ -6,6 +6,8 @@ import ru.virgil7.neurons.Neuron;
 import ru.virgil7.perceptrons.OneLayerPerceptron;
 import ru.virgil7.perceptrons.TwoLayerPerceptron;
 
+import java.util.Arrays;
+
 /**
  * Created by ViRGiL7 on 05.01.2017.
  * Project: Perceptron_logic
@@ -14,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        firstWork();
+        //        firstWork();
 
         Neuron[] neurons = {
                 new Neuron(new SigmoidFunction(1), 1),
@@ -59,25 +61,52 @@ public class Main {
         twoLayerPerceptron = new TwoLayerPerceptron(neurons);
 
         testInputs = new double[][]{
-                {0.01, 0.04, 0.09, 0.16},
-                {0.04, 0.09, 0.16, 0.25},
-                {0.09, 0.16, 0.25, 0.36},
-                {0.16, 0.25, 0.36, 0.49},
-                {0.25, 0.36, 0.49, 0.64},
+                {1, 4, 9, 16},
+                {4, 9, 16, 25},
+                {9, 16, 25, 36},
+                {16, 25, 36, 49},
+                {25, 36, 49, 64},
         };
+
         testTargets = new double[][]{
-                {0.25},
-                {0.36},
-                {0.49},
-                {0.64},
-                {0.81},
+                {25},
+                {36},
+                {49},
+                {64},
+                {81},
         };
 
-        twoLayerPerceptron.learn(testInputs, testTargets, 0.01, 0.0, 15000, 0.0001);
+        scaleTargets(testTargets, 1, 100);
 
-        twoLayerPerceptron.getResult(new double[]{0.04, 0.09, 0.16, 0.25});
-        twoLayerPerceptron.getResult(new double[]{0.09, 0.16, 0.25, 0.36});
-        twoLayerPerceptron.getResult(new double[]{0.25, 0.36, 0.49, 0.64});
+        twoLayerPerceptron.learn(testInputs, testTargets, 0.01, 0.0, 1500000, 0.001);
+
+        double[] result = twoLayerPerceptron.getResult(new double[]{4, 9, 16, 25});
+        scaleResult(result, 1, 100);
+        System.out.println(Arrays.toString(result));
+        result = twoLayerPerceptron.getResult(new double[]{9, 16, 25, 36});
+        scaleResult(result, 1, 100);
+        System.out.println(Arrays.toString(result));
+        result = twoLayerPerceptron.getResult(new double[]{25, 36, 49, 64});
+        scaleResult(result, 1, 100);
+        System.out.println(Arrays.toString(result));
+    }
+
+    private static void scaleResult(double[] result, double min, double max) {
+        double m = 0.1 / min;
+        double k = 0.8 / max;
+        for (int i = 0; i < result.length; i++) {
+            result[i] = (result[i] - m) / k;
+        }
+    }
+
+    private static void scaleTargets(double[][] testTargets, double min, double max) {
+        double m = 0.1 / min;
+        double k = 0.8 / max;
+        for (int i = 0; i < testTargets.length; i++) {
+            for (int j = 0; j < testTargets[0].length; j++) {
+                testTargets[i][j] = testTargets[i][j] * k + m;
+            }
+        }
     }
 
     private static void firstWork() throws Exception {
