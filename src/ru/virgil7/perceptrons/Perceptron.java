@@ -17,4 +17,6 @@ public abstract class Perceptron {
     }
 
     public abstract double[] getResult(double[] inputs) throws Exception;
+
+    public abstract void printResult(double[] inputs);
 }

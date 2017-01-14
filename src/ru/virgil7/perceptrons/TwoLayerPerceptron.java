@@ -105,6 +105,7 @@ public class TwoLayerPerceptron extends Perceptron {
         return outerLayerResults;
     }
 
+    @Override
     public void printResult(double[] inputs) {
         System.out.println(this.getClass().getSimpleName() + " results:\n" +
                 "Inputs:\t\t" + Arrays.toString(inputs) + "\nOutputs:\t" + Arrays.toString(getResult(inputs)));

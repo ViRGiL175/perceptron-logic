@@ -12,8 +12,7 @@ public class OneLayerPerceptron extends Perceptron {
         System.out.println("\n" + this.getClass().getSimpleName() + ". Neurons: " + outNeurons.length);
     }
 
-    public void learn(double[][] inputs, double[][] targets, double speed, double maxError, int maxEpoch)
-            throws Exception {
+    public void learn(double[][] inputs, double[][] targets, double speed, double maxError, int maxEpoch) {
 
         System.out.println("Start learning.\n" +
                 "Speed: " + speed + " " +
@@ -50,13 +49,16 @@ public class OneLayerPerceptron extends Perceptron {
     }
 
     @Override
-    public double[] getResult(double[] inputs) throws Exception {
+    public double[] getResult(double[] inputs) {
         double[] results = new double[outNeurons.length];
         for (int i = 0; i < results.length; i++) {
             results[i] = outNeurons[i].getResult(inputs);
         }
-        System.out.println(this.getClass().getSimpleName() + " results:\n" +
-                "Inputs:\t\t" + Arrays.toString(inputs) + "\nOutputs:\t" + Arrays.toString(results));
         return results;
+    }
+
+    public void printResult(double[] inputs) {
+        System.out.println(this.getClass().getSimpleName() + " results:\n" +
+                "Inputs:\t\t" + Arrays.toString(inputs) + "\nOutputs:\t" + Arrays.toString(getResult(inputs)));
     }
 }

@@ -15,7 +15,11 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
+        firstWork();
+        secondWork();
+    }
 
+    private static void secondWork() {
         Random random = new Random();
         Neuron[] neurons = {
                 new Neuron(new SigmoidFunction(random.nextDouble()), random.nextDouble()),
@@ -81,7 +85,7 @@ public class Main {
         twoLayerPerceptron.printResult(new double[]{25, 36, 49, 64});
     }
 
-    private static void firstWork() throws Exception {
+    private static void firstWork() {
         double[][] testInputs = {
                 {0, 0},
                 {0, 1},
@@ -101,10 +105,10 @@ public class Main {
         OneLayerPerceptron oneLayerPerceptron = new OneLayerPerceptron(neurons);
         oneLayerPerceptron.learn(testInputs, testTargets, 0.001, 0, 1500);
 
-        oneLayerPerceptron.getResult(new double[]{0, 0});
-        oneLayerPerceptron.getResult(new double[]{0, 1});
-        oneLayerPerceptron.getResult(new double[]{1, 0});
-        oneLayerPerceptron.getResult(new double[]{1, 1});
+        oneLayerPerceptron.printResult(new double[]{0, 0});
+        oneLayerPerceptron.printResult(new double[]{0, 1});
+        oneLayerPerceptron.printResult(new double[]{1, 0});
+        oneLayerPerceptron.printResult(new double[]{1, 1});
 
         testInputs = new double[][]{
                 {
@@ -168,37 +172,37 @@ public class Main {
         oneLayerPerceptron = new OneLayerPerceptron(neurons);
         oneLayerPerceptron.learn(testInputs, testTargets, 0.001, 0, 150000);
 
-        oneLayerPerceptron.getResult(new double[]{
+        oneLayerPerceptron.printResult(new double[]{
                 1, 1, 1, 1, 1,
                 1, 0, 1, 0, 1,
-                1, 1, 1, 1, 1,
+                1, 0, 1, 0, 1,
                 0, 0, 1, 0, 0,
                 0, 0, 1, 0, 0
         });
-        oneLayerPerceptron.getResult(new double[]{
+        oneLayerPerceptron.printResult(new double[]{
                 0, 0, 1, 0, 0,
-                0, 1, 0, 1, 0,
+                0, 0, 0, 1, 0,
                 1, 0, 0, 0, 1,
                 1, 1, 1, 1, 1,
                 1, 0, 0, 0, 1
         });
-        oneLayerPerceptron.getResult(new double[]{
+        oneLayerPerceptron.printResult(new double[]{
                 1, 1, 1, 1, 1,
                 0, 0, 1, 0, 0,
                 0, 0, 1, 0, 0,
                 0, 0, 1, 0, 0,
                 0, 0, 1, 0, 0
         });
-        oneLayerPerceptron.getResult(new double[]{
+        oneLayerPerceptron.printResult(new double[]{
                 1, 0, 0, 0, 1,
-                1, 0, 0, 1, 1,
-                1, 0, 1, 0, 1,
+                1, 0, 0, 0, 1,
+                1, 0, 0, 0, 1,
                 1, 1, 0, 0, 1,
                 1, 0, 0, 0, 1
         });
-        oneLayerPerceptron.getResult(new double[]{
+        oneLayerPerceptron.printResult(new double[]{
                 1, 0, 0, 0, 1,
-                0, 1, 0, 1, 0,
+                0, 0, 0, 0, 0,
                 0, 0, 1, 0, 0,
                 0, 1, 0, 1, 0,
                 1, 0, 0, 0, 1
