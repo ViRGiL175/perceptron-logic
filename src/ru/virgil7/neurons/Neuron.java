@@ -41,8 +41,9 @@ public class Neuron {
         return weights;
     }
 
-    public double getResult(double[] inputs) throws Exception {
+    public double getResult(double[] inputs) {
         if (inputsCount != inputs.length) {
+            System.out.println("Error!");
             throw new IndexOutOfBoundsException("Inputs count mismatch!");
         }
         sum = getSum(inputs);
