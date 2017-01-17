@@ -32,7 +32,8 @@ public class TwoLayerPerceptron extends Perceptron {
         System.out.println("Start learning.\n" +
                 "Speed: " + speed + " " +
                 "Max. error: " + maxError + " " +
-                "Max. epoch: " + maxEpoch + "\n" +
+                "Max. epoch: " + maxEpoch + " " +
+                "Min. Learn Efficiency: " + learnEfficiency + "\n" +
                 "Hidden Layer contain " + hiddenNeurons.length + " neurons.");
         if (targets[0].length != outs.length) {
             throw new IndexOutOfBoundsException("Targets count and Neurons count mismatch!");
@@ -62,11 +63,10 @@ public class TwoLayerPerceptron extends Perceptron {
             for (int k = 0; k < targets.length; k++) {
                 for (int i = 0; i < outNeurons.length; i++) {
                     double[] hiddenLayerResults = new double[hiddenNeurons.length];
-                    double outNeuronResult;
                     for (int j = 0; j < hiddenLayerResults.length; j++) {
                         hiddenLayerResults[j] = hiddenNeurons[j].getResult(inputs[k]);
                     }
-                    outNeuronResult = outNeurons[i].getResult(hiddenLayerResults);
+                    double outNeuronResult = outNeurons[i].getResult(hiddenLayerResults);
                     targetError = (0.5) * Math.pow(targets[k][i] - outNeuronResult, 2);
 
                     double delta = outNeuronResult * (1 - outNeuronResult) * (targets[k][i] - outNeuronResult);
@@ -76,8 +76,8 @@ public class TwoLayerPerceptron extends Perceptron {
                         outNeurons[i].getWeights()[j] += deltaWeightOut;
 
                         for (int l = 0; l < inputs[0].length; l++) {
-                            double deltaWeightHidden = speed + delta * outNeurons[i].getWeights()[j] *
-                                    hiddenLayerResults[j] * (1 - hiddenLayerResults[j]) * inputs[k][i];
+                            double deltaWeightHidden = speed * delta * outNeurons[i].getWeights()[j] *
+                                    hiddenLayerResults[j] * (1 - hiddenLayerResults[j]) * inputs[k][l];
                             hiddenNeurons[j].getWeights()[l] += deltaWeightHidden;
                         }
                     }

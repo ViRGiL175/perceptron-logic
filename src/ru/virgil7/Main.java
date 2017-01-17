@@ -6,8 +6,6 @@ import ru.virgil7.neurons.Neuron;
 import ru.virgil7.perceptrons.OneLayerPerceptron;
 import ru.virgil7.perceptrons.TwoLayerPerceptron;
 
-import java.util.Random;
-
 /**
  * Created by ViRGiL7 on 05.01.2017.
  * Project: Perceptron_logic
@@ -20,14 +18,12 @@ public class Main {
     }
 
     private static void secondWork() {
-        Random random = new Random();
         Neuron[] neurons = {
-                new Neuron(new SigmoidFunction(random.nextDouble()), random.nextDouble()),
+                new Neuron(new SigmoidFunction(1), -0.9)
         };
         TwoLayerPerceptron twoLayerPerceptron = new TwoLayerPerceptron(neurons, 1, 100);
 
         double[][] testInputs = {
-                {1},
                 {2},
                 {3},
                 {4},
@@ -39,7 +35,6 @@ public class Main {
                 {10}
         };
         double[][] testTargets = {
-                {1},
                 {4},
                 {9},
                 {16},
@@ -51,15 +46,14 @@ public class Main {
                 {100}
         };
 
-        twoLayerPerceptron.learn(testInputs, testTargets, 0.01, 0.01, 15000, 0.0001);
+        twoLayerPerceptron.learn(testInputs, testTargets, 0.5, 0.0001, 15000, 0.000001);
         twoLayerPerceptron.printResult(new double[]{8});
-        twoLayerPerceptron.printResult(new double[]{1});
         twoLayerPerceptron.printResult(new double[]{2});
+        twoLayerPerceptron.printResult(new double[]{5});
         twoLayerPerceptron.printResult(new double[]{4});
-        twoLayerPerceptron.printResult(new double[]{0});
 
         neurons = new Neuron[]{
-                new Neuron(new SigmoidFunction(random.nextDouble()), random.nextDouble()),
+                new Neuron(new SigmoidFunction(1))
         };
         twoLayerPerceptron = new TwoLayerPerceptron(neurons, 1, 100);
 
@@ -79,7 +73,7 @@ public class Main {
                 {81},
         };
 
-        twoLayerPerceptron.learn(testInputs, testTargets, 0.01, 0.0, 1500000, 0.001);
+        twoLayerPerceptron.learn(testInputs, testTargets, 1, 0.001, 1500000, 0.000001);
         twoLayerPerceptron.printResult(new double[]{4, 9, 16, 25});
         twoLayerPerceptron.printResult(new double[]{9, 16, 25, 36});
         twoLayerPerceptron.printResult(new double[]{25, 36, 49, 64});
